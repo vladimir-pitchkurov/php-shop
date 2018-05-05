@@ -10,6 +10,8 @@ return array(
 
     'category/([0-9]+)'               => 'catalog/category/$1',  /*  CatalogController->actionIndex()  */
 
+    'user/register'                   => 'user/register',
+
     ''                                => 'site/index',  /*  SiteController->actionIndex  */
 
 );
