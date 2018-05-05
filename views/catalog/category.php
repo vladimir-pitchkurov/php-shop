@@ -58,8 +58,10 @@
 
                 </div><!--features_items-->
 
-                <div class="recommended_items"><!--recommended_items-->
-                    <h2 class="title text-center">Рекомендуемые товары</h2>
+                <?= $pagination->get(); ?>
+
+                <!--<div class="recommended_items"><!--recommended_items-->
+                    <!--<h2 class="title text-center">Рекомендуемые товары</h2>
 
                     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
@@ -157,7 +159,7 @@
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </div>
-                </div><!--/recommended_items-->
+                </div>--><!--/recommended_items-->
 
             </div>
         </div>
