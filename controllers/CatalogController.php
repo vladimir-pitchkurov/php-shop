@@ -1,40 +1,47 @@
 <?php
 
-include_once ROOT . '/models/Categories.php';
-include_once ROOT . '/models/Product.php';
-include_once ROOT . '/components/Pagination.php';
-
+/**
+ * Контроллер CatalogController
+ * Каталог товаров
+ */
 class CatalogController
 {
 
-    public static function actionIndex()
+    /**
+     * Action для страницы "Каталог товаров"
+     */
+    public function actionIndex()
     {
-        $categories = array();
+        // Список категорий для левого меню
         $categories = Categories::getCategoriesList();
 
-        $latestProducts = array();
+        // Список последних товаров
         $latestProducts = Product::getLatestProducts(12);
 
+        // Подключаем вид
         require_once(ROOT . '/views/catalog/index.php');
         return true;
     }
 
-    public static function actionCategory($categoryId, $page = 1)
+    /**
+     * Action для страницы "Категория товаров"
+     */
+    public function actionCategory($categoryId, $page = 1)
     {
-
-        $categories = array();
+        // Список категорий для левого меню
         $categories = Categories::getCategoriesList();
 
-        $categoryProducts = array();
-        $categoryProducts = Product::getProductListByCategory($categoryId, $page);
+        // Список товаров в категории
+        $categoryProducts = Product::getProductsListByCategory($categoryId, $page);
 
-        $total = Product::getTotalCountOfProductsInCategory($categoryId);
-//        print_r($total['count']);die;
+        // Общее количетсво товаров (необходимо для постраничной навигации)
+        $total = Product::getTotalProductsInCategory($categoryId);
 
-        $pagination = new Pagination($total['count'], $page, Product::SHOW_BY_DEFAULT, 'page-');
+        // Создаем объект Pagination - постраничная навигация
+        $pagination = new Pagination($total, $page, Product::SHOW_BY_DEFAULT, 'page-');
 
-        require_once ROOT . '/views/catalog/category.php';
-
+        // Подключаем вид
+        require_once(ROOT . '/views/catalog/category.php');
         return true;
     }
 
