@@ -1,28 +1,27 @@
 <?php
 
-include_once ROOT.'/models/Categories.php';
-include_once ROOT.'/models/Product.php';
-
+/**
+ * Контроллер ProductController
+ * Товар
+ */
 class ProductController
 {
 
-    public function actionList()
-    {
-        echo 'ProductController -> actionList';
-        return true;
-    }
-
+    /**
+     * Action для страницы просмотра товара
+     * @param integer $productId <p>id товара</p>
+     */
     public function actionView($productId)
     {
-        $categories = array();
-        $categories = Categories::getCategoriesList();
+        // Список категорий для левого меню
+        $categories = Category::getCategoriesList();
 
+        // Получаем инфомрацию о товаре
         $product = Product::getProductById($productId);
 
-        require_once (ROOT.'/views/product/view.php');
-
+        // Подключаем вид
+        require_once(ROOT . '/views/product/view.php');
         return true;
-
     }
 
 }

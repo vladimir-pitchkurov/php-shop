@@ -1,17 +1,19 @@
-<? include ROOT . '/views/layouts/header.php'; ?>
+<?php include ROOT . '/views/layouts/header.php'; ?>
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-4 padding-right">
+<section>
+    <div class="container">
+        <div class="row">
 
-                            <h2>Кабинет пользователя</h2>
-
-                    <a href="#">Edit</a><br><a href="#">Cart</a>
-
-                </div>
-            </div>
+            <h3>Кабинет пользователя</h3>
+            
+            <h4>Привет, <?php echo $user['name'];?>!</h4>
+            <ul>
+                <li><a href="/cabinet/edit">Редактировать данные</a></li>
+                <!--<li><a href="/cabinet/history">Список покупок</a></li>-->
+            </ul>
+            
         </div>
-    </section>
+    </div>
+</section>
 
-<? include ROOT . '/views/layouts/footer.php'; ?>
+<?php include ROOT . '/views/layouts/footer.php'; ?>

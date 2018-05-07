@@ -32,7 +32,7 @@ class CartController
         echo Cart::addProduct($id);
         return true;
     }
-
+    
     /**
      * Action для добавления товара в корзину синхронным запросом
      * @param integer $id <p>id товара</p>
@@ -52,7 +52,7 @@ class CartController
     public function actionIndex()
     {
         // Список категорий для левого меню
-        $categories = Categories::getCategoriesList();
+        $categories = Category::getCategoriesList();
 
         // Получим идентификаторы и количество товаров в корзине
         $productsInCart = Cart::getProducts();
@@ -79,7 +79,7 @@ class CartController
      */
     public function actionCheckout()
     {
-        // Получием данные из корзины
+        // Получием данные из корзины      
         $productsInCart = Cart::getProducts();
 
         // Если товаров нет, отправляем пользователи искать товары на главную
@@ -145,7 +145,7 @@ class CartController
 
                 if ($result) {
                     // Если заказ успешно сохранен
-                    // Оповещаем администратора о новом заказе по почте
+                    // Оповещаем администратора о новом заказе по почте                
                     $adminEmail = 'php.start@mail.ru';
                     $message = '<a href="http://digital-mafia.net/admin/orders">Список заказов</a>';
                     $subject = 'Новый заказ!';

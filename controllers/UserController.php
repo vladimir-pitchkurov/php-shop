@@ -1,11 +1,8 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Админ
- * Date: 05.05.2018
- * Time: 20:53
- */
 
+/**
+ * Контроллер UserController
+ */
 class UserController
 {
     /**
@@ -21,7 +18,7 @@ class UserController
 
         // Обработка формы
         if (isset($_POST['submit'])) {
-            // Если форма отправлена
+            // Если форма отправлена 
             // Получаем данные из формы
             $name = $_POST['name'];
             $email = $_POST['email'];
@@ -43,7 +40,7 @@ class UserController
             if (User::checkEmailExists($email)) {
                 $errors[] = 'Такой email уже используется';
             }
-
+            
             if ($errors == false) {
                 // Если ошибок нет
                 // Регистрируем пользователя
@@ -55,7 +52,7 @@ class UserController
         require_once(ROOT . '/views/user/register.php');
         return true;
     }
-
+    
     /**
      * Action для страницы "Вход на сайт"
      */
@@ -64,10 +61,10 @@ class UserController
         // Переменные для формы
         $email = false;
         $password = false;
-
+        
         // Обработка формы
         if (isset($_POST['submit'])) {
-            // Если форма отправлена
+            // Если форма отправлена 
             // Получаем данные из формы
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -93,7 +90,7 @@ class UserController
                 // Если данные правильные, запоминаем пользователя (сессия)
                 User::auth($userId);
 
-                // Перенаправляем пользователя в закрытую часть - кабинет
+                // Перенаправляем пользователя в закрытую часть - кабинет 
                 header("Location: /cabinet");
             }
         }
@@ -108,13 +105,11 @@ class UserController
      */
     public function actionLogout()
     {
-        // Стартуем сессию
-        session_start();
-
         // Удаляем информацию о пользователе из сессии
         unset($_SESSION["user"]);
-
+        
         // Перенаправляем пользователя на главную страницу
         header("Location: /");
     }
+
 }

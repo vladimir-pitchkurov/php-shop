@@ -1,14 +1,16 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Админ
- * Date: 05.05.2018
- * Time: 9:21
- */
 
+/**
+ * Класс Db
+ * Компонент для работы с базой данных
+ */
 class Db
 {
 
+    /**
+     * Устанавливает соединение с базой данных
+     * @return \PDO <p>Объект класса PDO для работы с БД</p>
+     */
     public static function getConnection(){
         $paramsPath = ROOT.'/config/db_params.php';
         $params = include ($paramsPath);
@@ -20,5 +22,4 @@ class Db
 
         return $db;
     }
-
 }

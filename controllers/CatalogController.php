@@ -13,7 +13,7 @@ class CatalogController
     public function actionIndex()
     {
         // Список категорий для левого меню
-        $categories = Categories::getCategoriesList();
+        $categories = Category::getCategoriesList();
 
         // Список последних товаров
         $latestProducts = Product::getLatestProducts(12);
@@ -29,7 +29,7 @@ class CatalogController
     public function actionCategory($categoryId, $page = 1)
     {
         // Список категорий для левого меню
-        $categories = Categories::getCategoriesList();
+        $categories = Category::getCategoriesList();
 
         // Список товаров в категории
         $categoryProducts = Product::getProductsListByCategory($categoryId, $page);

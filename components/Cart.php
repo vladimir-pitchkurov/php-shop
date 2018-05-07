@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Админ
- * Date: 07.05.2018
- * Time: 0:28
- */
 
 /**
  * Класс Cart
@@ -32,7 +26,7 @@ class Cart
             $productsInCart = $_SESSION['products'];
         }
 
-        // Проверяем есть ли уже такой товар в корзине
+        // Проверяем есть ли уже такой товар в корзине 
         if (array_key_exists($id, $productsInCart)) {
             // Если такой товар есть в корзине, но был добавлен еще раз, увеличим количество на 1
             $productsInCart[$id] ++;

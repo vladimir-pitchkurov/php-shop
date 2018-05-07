@@ -1,22 +1,28 @@
 <?php
 
-include_once ROOT.'/models/Categories.php';
-include_once ROOT.'/models/Product.php';
-
+/**
+ * Контроллер CartController
+ */
 class SiteController
 {
 
-    public function actionIndex(){
+    /**
+     * Action для главной страницы
+     */
+    public function actionIndex()
+    {
+        // Список категорий для левого меню
+        $categories = Category::getCategoriesList();
 
-        $categories = array();
-        $categories = Categories::getCategoriesList();
-
-        $latestProducts = array();
+        // Список последних товаров
         $latestProducts = Product::getLatestProducts(6);
 
-        require_once (ROOT.'/views/site/index.php');
-        return true;
+        // Список товаров для слайдера
+        $sliderProducts = Product::getRecommendedProducts();
 
+        // Подключаем вид
+        require_once(ROOT . '/views/site/index.php');
+        return true;
     }
 
     /**
@@ -24,34 +30,56 @@ class SiteController
      */
     public function actionContact()
     {
+
         // Переменные для формы
         $userEmail = false;
         $userText = false;
         $result = false;
+
         // Обработка формы
         if (isset($_POST['submit'])) {
-            // Если форма отправлена
+            // Если форма отправлена 
             // Получаем данные из формы
             $userEmail = $_POST['userEmail'];
             $userText = $_POST['userText'];
+
             // Флаг ошибок
             $errors = false;
+
             // Валидация полей
             if (!User::checkEmail($userEmail)) {
                 $errors[] = 'Неправильный email';
             }
+
             if ($errors == false) {
                 // Если ошибок нет
-                // Отправляем письмо администратору
-                $adminEmail = 'vladimirpitbul@gmail.com';
+                // Отправляем письмо администратору 
+                $adminEmail = 'php.start@mail.ru';
                 $message = "Текст: {$userText}. От {$userEmail}";
                 $subject = 'Тема письма';
                 $result = mail($adminEmail, $subject, $message);
                 $result = true;
             }
         }
+
         // Подключаем вид
         require_once(ROOT . '/views/site/contact.php');
+        return true;
+    }
+    
+    /**
+     * Action для страницы "О магазине"
+     */
+    public function actionAbout()
+    {
+        // Подключаем вид
+        require_once(ROOT . '/views/site/about.php');
+        return true;
+    }
+
+    public function actionErr($req){
+        $str = ROOT.'/'.$req;
+        require_once(ROOT . '/views/site/err.php');
         return true;
     }
 

@@ -22,8 +22,8 @@ class Product
 
         // Текст запроса к БД
         $sql = 'SELECT id, name, price, is_new FROM product '
-            . 'WHERE status = "1" ORDER BY id DESC '
-            . 'LIMIT :count';
+                . 'WHERE status = "1" ORDER BY id DESC '
+                . 'LIMIT :count';
 
         // Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -31,7 +31,7 @@ class Product
 
         // Указываем, что хотим получить данные в виде массива
         $result->setFetchMode(PDO::FETCH_ASSOC);
-
+        
         // Выполнение коменды
         $result->execute();
 
@@ -65,8 +65,8 @@ class Product
 
         // Текст запроса к БД
         $sql = 'SELECT id, name, price, is_new FROM product '
-            . 'WHERE status = 1 AND category_id = :category_id '
-            . 'ORDER BY id ASC LIMIT :limit OFFSET :offset';
+                . 'WHERE status = 1 AND category_id = :category_id '
+                . 'ORDER BY id ASC LIMIT :limit OFFSET :offset';
 
         // Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -187,8 +187,8 @@ class Product
 
         // Получение и возврат результатов
         $result = $db->query('SELECT id, name, price, is_new FROM product '
-            . 'WHERE status = "1" AND is_recommended = "1" '
-            . 'ORDER BY id DESC');
+                . 'WHERE status = "1" AND is_recommended = "1" '
+                . 'ORDER BY id DESC');
         $i = 0;
         $productsList = array();
         while ($row = $result->fetch()) {
@@ -297,11 +297,11 @@ class Product
 
         // Текст запроса к БД
         $sql = 'INSERT INTO product '
-            . '(name, code, price, category_id, brand, availability,'
-            . 'description, is_new, is_recommended, status)'
-            . 'VALUES '
-            . '(:name, :code, :price, :category_id, :brand, :availability,'
-            . ':description, :is_new, :is_recommended, :status)';
+                . '(name, code, price, category_id, brand, availability,'
+                . 'description, is_new, is_recommended, status)'
+                . 'VALUES '
+                . '(:name, :code, :price, :category_id, :brand, :availability,'
+                . ':description, :is_new, :is_recommended, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
