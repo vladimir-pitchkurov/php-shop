@@ -15,6 +15,9 @@ class User
      */
     public static function register($name, $email, $password)
     {
+        $name = htmlentities($name);
+        $email = htmlentities($email);
+        $password = htmlentities($password);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -39,6 +42,9 @@ class User
      */
     public static function edit($id, $name, $password)
     {
+        $id =intval($id);
+        $name = htmlentities($name);
+        $password = htmlentities($password);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -63,6 +69,8 @@ class User
      */
     public static function checkUserData($email, $password)
     {
+        $email = htmlentities($email);
+        $password = htmlentities($password);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -91,6 +99,7 @@ class User
      */
     public static function auth($userId)
     {
+        $userId = intval($userId);
         // Записываем идентификатор пользователя в сессию
         $_SESSION['user'] = $userId;
     }
@@ -204,6 +213,7 @@ class User
      */
     public static function getUserById($id)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 

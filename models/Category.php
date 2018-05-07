@@ -63,6 +63,7 @@ class Category
      */
     public static function deleteCategoryById($id)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -85,6 +86,11 @@ class Category
      */
     public static function updateCategoryById($id, $name, $sortOrder, $status)
     {
+        $id = intval($id);
+        $name = htmlentities($name);
+        $sortOrder = htmlentities($sortOrder);
+        $status = htmlentities($status);
+
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -112,6 +118,7 @@ class Category
      */
     public static function getCategoryById($id)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -159,6 +166,9 @@ class Category
      */
     public static function createCategory($name, $sortOrder, $status)
     {
+        $name = htmlentities($name);
+        $sortOrder = htmlentities($sortOrder);
+        $status = htmlentities($status);
         // Соединение с БД
         $db = Db::getConnection();
 

@@ -17,6 +17,11 @@ class Order
      */
     public static function save($userName, $userPhone, $userComment, $userId, $products)
     {
+        $userId = intval($userId);
+        $userName = htmlentities($userName);
+        $userPhone = htmlentities($userPhone);
+        $userComment = htmlentities($userComment);
+
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -81,6 +86,7 @@ class Order
             case '4':
                 return 'Закрыт';
                 break;
+            default: return 'Нет Статуса???';
         }
     }
 
@@ -91,6 +97,7 @@ class Order
      */
     public static function getOrderById($id)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -117,6 +124,7 @@ class Order
      */
     public static function deleteOrderById($id)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -141,6 +149,12 @@ class Order
      */
     public static function updateOrderById($id, $userName, $userPhone, $userComment, $date, $status)
     {
+        $id = intval($id);
+        $userName = htmlentities($userName);
+        $userPhone = htmlentities($userPhone);
+        $userComment = htmlentities($userComment);
+        $date = htmlentities($date);
+        $status = htmlentities($status);
         // Соединение с БД
         $db = Db::getConnection();
 

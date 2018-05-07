@@ -17,6 +17,7 @@ class Product
      */
     public static function getLatestProducts($count = self::SHOW_BY_DEFAULT)
     {
+        $count = intval($count);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -56,6 +57,7 @@ class Product
      */
     public static function getProductsListByCategory($categoryId, $page = 1)
     {
+        $categoryId = intval($categoryId);
         $limit = Product::SHOW_BY_DEFAULT;
         // Смещение (для запроса)
         $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
@@ -97,6 +99,7 @@ class Product
      */
     public static function getProductById($id)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -124,6 +127,7 @@ class Product
      */
     public static function getTotalProductsInCategory($categoryId)
     {
+        $categoryId = intval($categoryId);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -231,6 +235,7 @@ class Product
      */
     public static function deleteProductById($id)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -251,6 +256,7 @@ class Product
      */
     public static function updateProductById($id, $options)
     {
+        $id = intval($id);
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -272,16 +278,16 @@ class Product
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
-        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
-        $result->bindParam(':code', $options['code'], PDO::PARAM_STR);
-        $result->bindParam(':price', $options['price'], PDO::PARAM_STR);
-        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
-        $result->bindParam(':brand', $options['brand'], PDO::PARAM_STR);
-        $result->bindParam(':availability', $options['availability'], PDO::PARAM_INT);
-        $result->bindParam(':description', $options['description'], PDO::PARAM_STR);
-        $result->bindParam(':is_new', $options['is_new'], PDO::PARAM_INT);
-        $result->bindParam(':is_recommended', $options['is_recommended'], PDO::PARAM_INT);
-        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
+        $result->bindParam(':name', htmlentities($options['name']), PDO::PARAM_STR);
+        $result->bindParam(':code', htmlentities($options['code']), PDO::PARAM_STR);
+        $result->bindParam(':price', htmlentities($options['price']), PDO::PARAM_STR);
+        $result->bindParam(':category_id', htmlentities($options['category_id']), PDO::PARAM_INT);
+        $result->bindParam(':brand', htmlentities($options['brand']), PDO::PARAM_STR);
+        $result->bindParam(':availability', htmlentities($options['availability']), PDO::PARAM_INT);
+        $result->bindParam(':description', htmlentities($options['description']), PDO::PARAM_STR);
+        $result->bindParam(':is_new', htmlentities($options['is_new']), PDO::PARAM_INT);
+        $result->bindParam(':is_recommended', htmlentities($options['is_recommended']), PDO::PARAM_INT);
+        $result->bindParam(':status', htmlentities($options['status']), PDO::PARAM_INT);
         return $result->execute();
     }
 
@@ -305,16 +311,16 @@ class Product
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
-        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
-        $result->bindParam(':code', $options['code'], PDO::PARAM_STR);
-        $result->bindParam(':price', $options['price'], PDO::PARAM_STR);
-        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
-        $result->bindParam(':brand', $options['brand'], PDO::PARAM_STR);
-        $result->bindParam(':availability', $options['availability'], PDO::PARAM_INT);
-        $result->bindParam(':description', $options['description'], PDO::PARAM_STR);
-        $result->bindParam(':is_new', $options['is_new'], PDO::PARAM_INT);
-        $result->bindParam(':is_recommended', $options['is_recommended'], PDO::PARAM_INT);
-        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
+        $result->bindParam(':name', htmlentities($options['name']), PDO::PARAM_STR);
+        $result->bindParam(':code', htmlentities($options['code']), PDO::PARAM_STR);
+        $result->bindParam(':price', htmlentities($options['price']), PDO::PARAM_STR);
+        $result->bindParam(':category_id', htmlentities($options['category_id']), PDO::PARAM_INT);
+        $result->bindParam(':brand', htmlentities($options['brand']), PDO::PARAM_STR);
+        $result->bindParam(':availability', htmlentities($options['availability']), PDO::PARAM_INT);
+        $result->bindParam(':description', htmlentities($options['description']), PDO::PARAM_STR);
+        $result->bindParam(':is_new', htmlentities($options['is_new']), PDO::PARAM_INT);
+        $result->bindParam(':is_recommended', htmlentities($options['is_recommended']), PDO::PARAM_INT);
+        $result->bindParam(':status', htmlentities($options['status']), PDO::PARAM_INT);
         if ($result->execute()) {
             // Если запрос выполенен успешно, возвращаем id добавленной записи
             return $db->lastInsertId();
@@ -348,6 +354,7 @@ class Product
      */
     public static function getImage($id)
     {
+        $id = intval($id);
         // Название изображения-пустышки
         $noImage = 'no-image.jpg';
 
